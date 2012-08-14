@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Single Post Message
-Plugin URI: http://tommcfarlin.com/projects/single-post-message
+Plugin URI: http://tommcfarlin.com/single-post-message
 Description: Easily add short messages and announcements above posts. Displays in the RSS feed and on the blog.
-Version: 1.0
+Version: 1.1
 Author: Tom McFarlin
 Author URI: http://tommcfarlin.com
 Author Email: tom@tommcfarlin.com

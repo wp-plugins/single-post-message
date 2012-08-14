@@ -4,7 +4,7 @@ Donate link: http://tommcfarlin.com/projects/post-message
 Tags: post
 Requires at least: 3.4.1
 Tested up to: 3.4.1
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Single Post Message...
 * Is available directly under the post content editor
 * Is fully localized and ready for translation
 
-For more information or to follow the project, check out the [project page](http://tommcfarlin.com/projects/single-post-message).
+For more information or to follow the project, check out the [project page](http://tommcfarlin.com/single-post-message).
 
 == Installation ==
 
@@ -45,6 +45,10 @@ For more information or to follow the project, check out the [project page](http
 2. The Single Post Message rendered between the title and the post content
 
 == Changelog ==
+
+= 1.1 =
+* Updating the donate link
+* Updating the project page URL
 
 = 1.0 =
 * Initial release

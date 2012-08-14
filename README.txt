@@ -1,6 +1,6 @@
 === Single Post Message ===
 Contributors: tommcfarlin
-Donate link: http://tommcfarlin.com/projects/post-message
+Donate link: http://tommcfarlin.com/donate
 Tags: post
 Requires at least: 3.4.1
 Tested up to: 3.4.1

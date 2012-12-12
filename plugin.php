@@ -3,7 +3,7 @@
 Plugin Name: Single Post Message
 Plugin URI: http://tommcfarlin.com/single-post-message
 Description: Easily add short messages and announcements above posts. Displays in the RSS feed and on the blog.
-Version: 1.1
+Version: 1.2
 Author: Tom McFarlin
 Author URI: http://tommcfarlin.com
 Author Email: tom@tommcfarlin.com
@@ -40,18 +40,19 @@ class Single_Post_Message {
 	 */
 	function __construct() {
 	
-		load_plugin_textdomain( 'single-post-message', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
+		// Load plugin textdomain
+		add_action( 'init', array( $this, 'plugin_textdomain' ) );
 	
 		// Include admin styles
-		add_action( 'admin_print_styles', array( &$this, 'add_admin_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( &$this, 'add_admin_scripts' ) );
+		add_action( 'admin_print_styles', array( $this, 'add_admin_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_scripts' ) );
 		
 		// Add the post meta box to the post editor
-		add_action( 'add_meta_boxes', array( &$this, 'add_notice_metabox' ) );
-		add_action( 'save_post', array( &$this, 'save_notice' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_notice_metabox' ) );
+		add_action( 'save_post', array( $this, 'save_notice' ) );
 		
 		// Append the notice before the content in both the blog and in the feed.
-	    add_filter( 'the_content', array( &$this, 'prepend_single_post_message' ) );
+	    add_filter( 'the_content', array( $this, 'prepend_single_post_message' ) );
 
 	} // end constructor
 	
@@ -59,24 +60,25 @@ class Single_Post_Message {
 	 * Core Functions
 	 *---------------------------------------------*/
 	 
+	 /**
+	  * Loads the plugin textdomain.
+	  */
+	 function plugin_textdomain() {
+		 load_plugin_textdomain( 'single-post-message', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
+	 } // end plugin_textdomain
+	 
 	/**
  	 * Introduces the admin styles
  	 */
  	 function add_admin_styles() {
-	 	 
-	 	 wp_register_style( 'single-post-message', plugins_url() . '/single-post-message/css/admin.css' );
-	 	 wp_enqueue_style( 'single-post-message' );
-	 	 
+	 	 wp_enqueue_style( 'single-post-message', plugins_url() . '/single-post-message/css/admin.css' );
  	 } // end add_admin_styles
 	
 	/**
  	 * Introduces the admin scripts
  	 */
  	 function add_admin_scripts() {
-	 	 
-	 	 wp_register_script( 'single-post-message', plugins_url() . '/single-post-message/js/admin.min.js' );
-	 	 wp_enqueue_script( 'single-post-message' );
-	 	 
+	 	 wp_enqueue_script( 'single-post-message', plugins_url() . '/single-post-message/js/admin.min.js' );
  	 } // end add_admin_styles
 	
 	/**
@@ -87,7 +89,7 @@ class Single_Post_Message {
 		add_meta_box(
 			'single_post_message',
 			__( 'Post Message', 'single-post-message' ),
-			array( &$this, 'single_post_message_display' ),
+			array( $this, 'single_post_message_display' ),
 			'post',
 			'normal',
 			'high'
@@ -102,6 +104,7 @@ class Single_Post_Message {
 		
 		wp_nonce_field( plugin_basename( __FILE__ ), 'single_post_message_nonce' );
 
+		// The textfield and preview area
 		$html = '<textarea id="single-post-message" name="single_post_message" placeholder="' . __( 'Enter your post message here. HTML accepted.', 'single-post-message' ) . '">' . get_post_meta( $post->ID, 'single_post_message', true ) . '</textarea>';
 		
 		$html .= '<p id="single-post-message-preview">';
@@ -113,6 +116,15 @@ class Single_Post_Message {
 			} // end if/else
 			
 		$html .= '</p><!-- /#single-post-message-preview -->';
+		
+		// The position element
+		$post_message_position = get_post_meta( $post->ID, 'single_post_message_position', true );
+		
+		$html .= __( 'Display this message ', 'single-post-message' );
+		$html .= '<select id="single_post_message_position" name="single_post_message_position">';
+			$html .= '<option value="above"' . selected( 'above', $post_message_position ) . '>' . __( 'above the post content.', 'single-post-message' ) . '</option>';
+			$html .= '<option value="below"' . selected( 'below', $post_message_position ) . '>' . __( 'below the post content.', 'single-post-message' ) . '</option>';
+		$html .= '</select>';
 		
 		echo $html;
 		
@@ -144,16 +156,18 @@ class Single_Post_Message {
 				} // end if
 			} // end if/else
 		
-			// Read the post message
+			// Read the post message and its position
 			$post_message = isset( $_POST['single_post_message'] ) ? $_POST['single_post_message'] : '';
+			$post_message_position = isset( $_POST['single_post_message_position'] ) ? $_POST['single_post_message_position'] : 'above';
 			
-			// If the value exists, delete it first. I don't want to write extra rows into the table.
+			// If the value for the post message exists, delete it first. I don't want to write extra rows into the table.
 			if ( 0 == count( get_post_meta( $post_id, 'single_post_message' ) ) ) {
 				delete_post_meta( $post_id, 'single_post_message' );
 			} // end if
 	
 			// Update it for this post.
 			update_post_meta( $post_id, 'single_post_message', $post_message );
+			update_post_meta( $post_id, 'single_post_message_position', $post_message_position );
 	
 		} // end if
 	
@@ -174,7 +188,11 @@ class Single_Post_Message {
 	    		$post_message .= get_post_meta( get_the_ID(), 'single_post_message', true );
 	    	$post_message .= '</p><!-- /.single-post-message -->';
 	    	
-	    	$content = $post_message . $content;
+	    	if( 'below' == get_post_meta( get_the_ID(), 'single_post_message_position', true ) ) {
+			    $content = $content . $post_message;
+			} else {
+				$content = $post_message . $content;
+			} // end if/else
 	    	
     	} // end if 
     	

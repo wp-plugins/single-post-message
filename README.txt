@@ -3,8 +3,8 @@ Contributors: tommcfarlin
 Donate link: http://tommcfarlin.com/projects/post-message
 Tags: post
 Requires at least: 3.4.1
-Tested up to: 3.4.1
-Stable tag: 1.1
+Tested up to: 3.5
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,11 @@ For more information or to follow the project, check out the [project page](http
 2. The Single Post Message rendered between the title and the post content
 
 == Changelog ==
+
+= 1.2 =
+* Adding the option to place the notice at the top or the bottom of the post content
+* Updating features to be compliant with newer versions of PHP
+* Updating localization calls
 
 = 1.1 =
 * Updating the donate link

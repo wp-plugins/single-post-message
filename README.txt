@@ -4,7 +4,7 @@ Donate link: http://tommcfarlin.com/projects/post-message
 Tags: post
 Requires at least: 3.4.1
 Tested up to: 3.5
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,9 @@ For more information or to follow the project, check out the [project page](http
 2. The Single Post Message rendered between the title and the post content
 
 == Changelog ==
+
+= 1.2.2 =
+* Fixing a minor problem displaying text above the post message textarea
 
 = 1.2.1 =
 * Minor update to make sure that the post message only displays below the content in the single view

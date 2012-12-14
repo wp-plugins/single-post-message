@@ -3,7 +3,7 @@
 Plugin Name: Single Post Message
 Plugin URI: http://tommcfarlin.com/single-post-message
 Description: Easily add short messages and announcements above posts. Displays in the RSS feed and on the blog.
-Version: 1.2.1
+Version: 1.2.2
 Author: Tom McFarlin
 Author URI: http://tommcfarlin.com
 Author Email: tom@tommcfarlin.com
@@ -122,8 +122,8 @@ class Single_Post_Message {
 		
 		$html .= __( 'Display this message ', 'single-post-message' );
 		$html .= '<select id="single_post_message_position" name="single_post_message_position">';
-			$html .= '<option value="above"' . selected( 'above', $post_message_position ) . '>' . __( 'above the post content.', 'single-post-message' ) . '</option>';
-			$html .= '<option value="below"' . selected( 'below', $post_message_position ) . '>' . __( 'below the post content.', 'single-post-message' ) . '</option>';
+			$html .= '<option value="above"' . selected( 'above', $post_message_position, false ) . '>' . __( 'above the post content.', 'single-post-message' ) . '</option>';
+			$html .= '<option value="below"' . selected( 'below', $post_message_position, false ) . '>' . __( 'below the post content.', 'single-post-message' ) . '</option>';
 		$html .= '</select>';
 		
 		echo $html;

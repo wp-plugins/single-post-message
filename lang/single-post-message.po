@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Single Post Message 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-30 23:03-0500\n"
-"PO-Revision-Date: 2012-07-30 23:03-0500\n"
+"POT-Creation-Date: 2012-12-13 22:38-0500\n"
+"PO-Revision-Date: 2012-12-13 22:39-0500\n"
 "Last-Translator: Tom McFarlin <tom@tommcfarlin.com>\n"
 "Language-Team: 8BIT <info@8bit.io>\n"
 "Language: en_US\n"
@@ -12,16 +12,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../plugin.php:89
+#: ../plugin.php:91
 msgid "Post Message"
 msgstr ""
 
-#: ../plugin.php:105
+#: ../plugin.php:108
 msgid "Enter your post message here. HTML accepted."
 msgstr ""
 
-#: ../plugin.php:110
+#: ../plugin.php:113
 msgid "Your post message preview will appear here."
+msgstr ""
+
+#: ../plugin.php:123
+msgid "Display this message "
+msgstr ""
+
+#: ../plugin.php:125
+msgid "above the post content."
+msgstr ""
+
+#: ../plugin.php:126
+msgid "below the post content."
 msgstr ""
